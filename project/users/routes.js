@@ -11,7 +11,6 @@ export default function UserRoutes(app) {
     const status = await dao.deleteUser(req.params.userId);
     res.json(status);
 };
-
   
   const findAllUsers = async (req, res) => {
     const { role, name } = req.query;
