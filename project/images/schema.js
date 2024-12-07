@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const imagesSchema = new mongoose.Schema({
     userId: { type: String, required: true },
-    imageURL : String,
+    imageURL: { type: String, required: true },
     title: String,
     timestamp: { type: Date, default: Date.now },
     },

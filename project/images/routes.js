@@ -8,13 +8,13 @@ export default function ImageRoutes(app) {
 
     const findAllImages = async (req, res) => {
         const images = await dao.findAllImages();
-        res.json(images);
+        res.send(images);
     };
 
     const findImagesForUser = async (req, res) => {
         const userId = req.params.userId;
         const images = await dao.findAllImagesForUser(userId);
-        res.json(images);
+        res.send(images);
     };
 
     app.post("/api/images", createImage);

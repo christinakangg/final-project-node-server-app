@@ -1,12 +1,14 @@
 import model from "./model.js"
 
-export const createImage = (image) => {
-    delete image._id
-    return model.create(image);
+export const createImage = async (image) => {
+    const imageCopy = { ...image };
+    delete imageCopy._id;
+    const createdImage = await model.create(imageCopy);
+    return createdImage;
 }
 
 export const findAllImages = () => model.find();
 
 export const findAllImagesForUser = (userId) => {
-     model.find({ userId: userId });
+     return model.find({ userId: userId });
 }
