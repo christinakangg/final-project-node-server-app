@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from "cors";
 import session from "express-session";
 import UserRoutes from "./project/users/routes.js";
+import ImagesRoutes from "./project/images/routes.js";
 
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/final-project"
@@ -33,6 +34,8 @@ const sessionOptions = {
   }
 
 app.use(session(sessionOptions));  
+
 UserRoutes(app);
+ImagesRoutes(app);
 
 app.listen(process.env.PORT || 4000)
