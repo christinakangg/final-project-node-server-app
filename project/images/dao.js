@@ -12,3 +12,8 @@ export const findAllImages = () => model.find();
 export const findAllImagesForUser = (userId) => {
      return model.find({ userId: userId });
 }
+
+export const findMostRecentImage = () => {
+    const result = model.findOne().sort({ timestamp: -1 });
+    return result;
+}
