@@ -1,5 +1,6 @@
 import * as dao from "./dao.js";
 
+
 export default function ImageRoutes(app) {
     const createImage = async (req, res) => {
         const image = await dao.createImage(req.body);
@@ -11,19 +12,38 @@ export default function ImageRoutes(app) {
         res.send(images);
     };
 
+    
     const findImagesForUser = async (req, res) => {
         const userId = req.params.userId;
         const images = await dao.findAllImagesForUser(userId);
         res.send(images);
     };
-
+    const findStoryImages = async (req, res) => {
+        const images = await dao.findStoryImages();
+        res.send(images);
+      
+    }
     const mostRecentImage = async (req, res) => {
         const image = await dao.findMostRecentImage();
         res.send(image);
     };
 
+    const updateImageLikes = async (req, res) => {
+     
+            const imageId = req.params.imageId;
+            const image = await dao.findImageById(imageId);
+            if (!image) return;
+            image.likes += 1;
+            const updatedImage = await image.save();
+            res.json(updatedImage);
+        
+    };
+
     app.post("/api/images", createImage);
     app.get("/api/images/recent", mostRecentImage);
     app.get("/api/images", findAllImages);
+    app.get("/api/images/story", findStoryImages);
     app.get("/api/images/:userId", findImagesForUser);
-};
+    app.post("/api/images/:imageId/likes", updateImageLikes);
+    
+}
