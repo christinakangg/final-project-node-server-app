@@ -50,6 +50,11 @@ export default function ImageRoutes(app) {
         
     };
 
+    const findOneImageById = async (req, res) => {
+        const image = await dao.findImageById(req.params.imageId);
+        res.json(image);
+    }
+
     app.post("/api/images", createImage);
     app.get("/api/images/recent", mostRecentImage);
     app.get("/api/images", findAllImages);
@@ -58,5 +63,5 @@ export default function ImageRoutes(app) {
     app.get("/api/images/:userId/recent", mostRecentImageForUser);
     app.get("/api/images/:tag/tag", findImagesByTag);
     app.post("/api/images/:imageId/likes", updateImageLikes);
-    
+    app.get("/api/images/id/:imageId", findOneImageById);
 };
