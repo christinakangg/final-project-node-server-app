@@ -21,3 +21,7 @@ export const findMostRecentImage = () => {
     const result = model.findOne().sort({ timestamp: -1 });
     return result;
 }
+
+export const findImagesByTag = (tag_name) => {
+    return model.find({ tags: { $in: [tag_name] } });
+}

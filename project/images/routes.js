@@ -27,9 +27,16 @@ export default function ImageRoutes(app) {
         res.send(image);
     };
 
+    const findImagesByTag = async (req, res) => {
+        const tag = req.params.tag;
+        const images = await dao.findImagesByTag(tag);
+        res.send(images);
+    }
+
     app.post("/api/images", createImage);
     app.get("/api/images/recent", mostRecentImage);
     app.get("/api/images", findAllImages);
     app.get("/api/images/:userId", findImagesForUser);
     app.get("/api/images/:userId/recent", mostRecentImageForUser);
+    app.get("/api/images/:tag/tag", findImagesByTag);
 };
