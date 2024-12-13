@@ -4,6 +4,7 @@ const imagesSchema = new mongoose.Schema({
     imageURL: { type: String, required: true },
     title: String,
     timestamp: { type: Date, default: Date.now },
+    tags: [String],
     likes: { type: Number, default: 0},
     },
     { collection: "images"}

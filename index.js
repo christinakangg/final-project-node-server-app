@@ -5,11 +5,10 @@ import cors from "cors";
 import session from "express-session";
 import UserRoutes from './project/users/routes.js';
 import ImagesRoutes from "./project/images/routes.js";
-
+import TagsRoutes from "./project/tags/routes.js";
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb+srv://user:project2024@project.wlnci.mongodb.net/project?retryWrites=true&w=majority&appName=project"
 mongoose.connect(CONNECTION_STRING);
-console.log(CONNECTION_STRING)
 const app = express()
 
 app.use(express.json());
@@ -37,4 +36,5 @@ app.use(session(sessionOptions));
 app.use(express.json());
 UserRoutes(app)
 ImagesRoutes(app)
+TagsRoutes(app)
 app.listen(process.env.PORT || 4000)

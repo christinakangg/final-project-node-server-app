@@ -28,6 +28,17 @@ export default function ImageRoutes(app) {
         res.send(image);
     };
 
+    const mostRecentImageForUser = async (req, res) => {
+        const image = await dao.findMostRecentImageForUser(req.params.userId);
+        res.send(image);
+    };
+
+    const findImagesByTag = async (req, res) => {
+        const tag = req.params.tag;
+        const images = await dao.findImagesByTag(tag);
+        res.send(images);
+    }
+
     const updateImageLikes = async (req, res) => {
      
             const imageId = req.params.imageId;
@@ -44,6 +55,8 @@ export default function ImageRoutes(app) {
     app.get("/api/images", findAllImages);
     app.get("/api/images/story", findStoryImages);
     app.get("/api/images/:userId", findImagesForUser);
+    app.get("/api/images/:userId/recent", mostRecentImageForUser);
+    app.get("/api/images/:tag/tag", findImagesByTag);
     app.post("/api/images/:imageId/likes", updateImageLikes);
     
-}
+};
